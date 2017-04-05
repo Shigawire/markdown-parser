@@ -7,14 +7,44 @@
 
     <!-- Loading Flat UI -->
     <link href="assets/flat-ui/css/flat-ui.css" rel="stylesheet">
-    <link href="assets/flat-ui/css/demo.css" rel="stylesheet">
 
+    <link href="assets/app.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Markdown Parser</h1>
+    <!--<h1>Markdown Parser</h1>-->
 
-    <script src="assets/flat-ui/js/flat-ui.min.js"></script>
+    <div class="col-xs-4 col-md-4 split-border-right">
+        Markdown Code
+        <div id="markdown-input">**awdaa aaaa** awda**
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-4 split-border-right split-border-left">
+        Parsed HTML Code :)
+        <div id="html-output"></div>
+    </div>
+    <div class="col-xs-4 col-md-4 split-border-left">
+        <div id="html-render"></div>
+    </div>
+
+    <!--<!-- Electron window scope fix (http://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined) -->
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+
+    <script src="assets/jquery-3.2.0.min.js"></script>
+    <script src="assets/flat-ui/js/flat-ui.js"></script>
+
+    <!-- ACE Code Editor -->
+
+    <script src="assets/ace/ace.js"></script>
+
+    <!-- App Assets -->
+    <script src="assets/js/markdown-parser.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>

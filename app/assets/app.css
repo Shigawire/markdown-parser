@@ -1,0 +1,29 @@
+.split-border-right {
+    border-right: 4px solid #1ABC9C;
+}
+
+.split-border-left {
+    border-left: 4px solid #1ABC9C;
+}
+
+.split-border-left,
+.split-border-right {
+    min-height: 100% !important;
+}
+
+.split-border-left:hover {
+    border-left: 4px solid #16A085;
+}
+
+.split-border-right:hover {
+    border-right: 4px solid #16A085;
+}
+
+#markdown-input,
+#html-output {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
