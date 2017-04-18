@@ -1,48 +1,27 @@
 (function() {
   this.MarkdownParser = (function() {
-    var buildHTMLNode, matchMDtoHTML, parse, regExPatterns;
+    var parse, regExPatterns;
     regExPatterns = {
-      '^(\\*\\*)([\\s\\S]+?)\\1': 'strong',
-      '^\\*(.*?)\\*': 'i',
-      '^##(.*)': 'h2',
-      '^#(.*)': 'h1'
-    };
-    buildHTMLNode = function(content, nodeType) {
-      var element;
-      element = $(document.createElement(nodeType));
-      element.text(content);
-      return element.prop('outerHTML');
-    };
-    matchMDtoHTML = function(markdownChunk) {
-      var matchedContent, matchedTextGroups, nodeType, regExp, regExpPattern, transpiledHTMLChunk;
-      console.log(markdownChunk);
-      transpiledHTMLChunk = '';
-      for (regExpPattern in regExPatterns) {
-        nodeType = regExPatterns[regExpPattern];
-        regExp = new RegExp(regExpPattern);
-        console.log(regExp + regExp.test(markdownChunk));
-        if (regExp.test(markdownChunk) === false) {
-          transpiledHTMLChunk = buildHTMLNode(markdownChunk, 'p');
-          continue;
-        }
-        matchedTextGroups = regExp.exec(markdownChunk);
-        matchedContent = matchedTextGroups[2];
-        matchedContent;
-        transpiledHTMLChunk = buildHTMLNode(matchedContent, nodeType);
-        break;
-      }
-      return transpiledHTMLChunk;
+      '(\\*\\*)([\\s\\S]+?)\\1': '<strong>$2</strong>',
+      '^\\*\\s(.*)': '<li>$1</li>',
+      '(<li>.*<\/li>\n)+': function(li_set) {
+        return '<ol>\n' + li_set + '</ol>\n';
+      },
+      '(\\*)([\\s\\S]+?)\\1': '<i>$2</i>',
+      '^##(.*)': '<h2>$1</h2>',
+      '^#(.*)': '<h1>$1</h1>',
+      '^>\\s([\\s\\S]*?\\n|.*?)$': '<p><blockquote>$1</blockquote></p>\n',
+      '^>\\s([\\s\\S]*?)$': '<p><blockquote>$1</blockquote></p>\n',
+      '(\n\n)': '\n<p></p>\n'
     };
     parse = function(markdownCode) {
-      var i, len, linebreakRegExp, markdownChunk, markdownChunks, transpiledHTMLOutput;
-      linebreakRegExp = new RegExp(/[^\n]+/g);
+      var regExpPattern, replacementRule, transpiledHTMLOutput;
       transpiledHTMLOutput = '';
-      markdownChunks = markdownCode.match(linebreakRegExp);
-      for (i = 0, len = markdownChunks.length; i < len; i++) {
-        markdownChunk = markdownChunks[i];
-        transpiledHTMLOutput += matchMDtoHTML(markdownChunk) + '\n';
+      for (regExpPattern in regExPatterns) {
+        replacementRule = regExPatterns[regExpPattern];
+        markdownCode = markdownCode.replace(new RegExp(regExpPattern, 'gm'), replacementRule);
       }
-      return transpiledHTMLOutput;
+      return transpiledHTMLOutput = markdownCode;
     };
     return {
       parse: parse

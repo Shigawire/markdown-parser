@@ -6,8 +6,7 @@
     border-left: 4px solid #1ABC9C;
 }
 
-.split-border-left,
-.split-border-right {
+.full-height {
     min-height: 100% !important;
 }
 
@@ -20,10 +19,13 @@
 }
 
 #markdown-input,
-#html-output {
+#html-output,
+#html-render {
+    overflow: scroll;
     position: absolute !important;
-    top: 0;
+    top: 100;
     right: 0;
     bottom: 0;
     left: 0;
+    border-top: 4px solid #16A085;
 }
