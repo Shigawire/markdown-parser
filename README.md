@@ -4,12 +4,19 @@ Dieser Markdown-Parser verwendet Regular Expressions um Markdown-Blöcke mit vor
 
 Der finale Code (in assets/js/markdown-parser.js) ist nur 970 Bytes groß und besteht aus lediglich 30 LOC.
 
+
+# Live Demo...
+... gibt es [hier auf GitHub.com](https://shigawire.github.io/markdown-parser/app/index.html)
+
 ## Programmierung
 Der Quellcode wurde in Coffescript geschrieben, die Coffe-Dateien liegen in /app/scripts/**.coffee.
 
 Durch den gulp-Task ```gulp coffee``` können diese Coffeescript-Dateien in das finale Javascript-Format transpiliert werden.
 In diesem Prozess werden Kommentare entfernt - kommentiert sind also nur die Coffescript-Dateien.
 Im Zuge des transpiling werden die letztlichen Javascript-Dateien nach /assets/js/**.js kopiert.
+
+Die App selber kann einfach im Browser gestartet werden:
+Einfach die app/index.html aufrufen.
 
 ## Markdown Parser
 
