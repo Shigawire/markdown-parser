@@ -5,13 +5,12 @@
       '(\\*\\*)([\\s\\S]+?)\\1': '<strong>$2</strong>',
       '^\\*\\s(.*)': '<li>$1</li>',
       '(<li>.*<\/li>\n)+': function(li_set) {
-        return '<ol>\n' + li_set + '</ol>\n';
+        return '<ul>\n' + li_set + '</ul>\n';
       },
       '(\\*)([\\s\\S]+?)\\1': '<i>$2</i>',
       '^##(.*)': '<h2>$1</h2>',
       '^#(.*)': '<h1>$1</h1>',
-      '^>\\s([\\s\\S]*?\\n|.*?)$': '<p><blockquote>$1</blockquote></p>\n',
-      '^>\\s([\\s\\S]*?)$': '<p><blockquote>$1</blockquote></p>\n',
+      '^>([\\s\\S]*?\\n|.*?)$': '<p><blockquote>$1</blockquote></p>\n',
       '(\n\n)': '\n<p></p>\n'
     };
     parse = function(markdownCode) {
